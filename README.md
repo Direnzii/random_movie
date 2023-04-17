@@ -9,7 +9,7 @@ Projeto voltado ao desenvolvimento de um portal utilizando o FW Flask (Py), HTML
 Apenas clone o repo e faça o download das dependencias
 
 ```bash
-https://github.com/Direnzii/random_movie.git
+git clone https://github.com/Direnzii/random_movie.git
 ```
 
 ## Uso
