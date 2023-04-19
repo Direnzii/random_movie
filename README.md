@@ -1,4 +1,4 @@
-![LOGO_API_MOVIE](img/logo_api_movie.png)
+![LOGO_API_MOVIE](img_readme/logo_api_movie.png)
 
 # Projeto Random Movie !
 
