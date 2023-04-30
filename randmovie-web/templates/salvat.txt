@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Movie - Filme</title>
+	<!-- Usado para definir o icone da aba -->
+	<link rel="icon"
+		  type="image/jpg"
+		  href="../img/popcorn.png" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <meta charset="utf-8">
+	<style>
+
+    body {
+			background: url(../img/movie.jpg);
+  			background-size: cover;
+    }
+
+	#check{
+		display: none;
+		background-color: #f00;
+	}
+	#icone{
+		cursor: pointer;
+		padding: 10px;
+		position: absolute;
+		z-index: 1;
+	}
+	.barra{
+		background-color: #000000;
+		height: 100%;
+		width: 300px;
+		position: absolute;
+		left: -300px;
+		transition: all .2s linear;
+	}
+	.barra .link {
+		list-style: none;
+		background-color: #494950;
+	}
+
+	nav {
+		width: 100%;
+		position: relative;
+		top: 60px;
+	}
+	nav a {
+		text-decoration: none;
+	}
+	.link {
+		background-color: #494950;
+		padding: 20px;
+		color: #f4f4f9;
+		font-family: 'Arial';
+		font-size: 12pt;
+		padding: 20px;
+		border-bottom: 2px solid #222;
+		transition:  all .15s linear;
+		opacity: 0;
+	}
+
+	.link:hover {
+		background-color: #02022e;
+	}
+
+	#check:checked ~ .barra nav a .link {
+			opacity: 1;
+			margin-top: 0;
+			transition-delay: .15s;
+	}
+	#check:checked ~ .barra {
+			transform: translateX(300px);
+
+	}
+	p {
+		color: white;
+	}
+
+	.btn-primary {
+		color: #fff;
+		background-color: #0d6efd;
+		border-color: #0d6efd;
+		margin-bottom: 1pc;
+		font-size: 40px;
+		border-radius: 30px;
+		box-shadow: 10px 5px 20px black;
+		position: absolute;
+		right: 4%;
+		bottom: 20px;
+		width: 8%;
+		height: 8%;
+	}
+
+	.imagem {
+		width: 35%;
+		height: 35%;
+		margin: 65px;
+		border: 8px solid #cccaca;
+		box-shadow: 10px 5px 20px rgb(255, 255, 255, 0.40);
+
+	}
+
+	.conteudo {
+		color: white;
+		display: flex;
+		align-items: center;
+	}
+
+	ul {
+	    display: inline-block;
+	    vertical-align: top;
+	    font-size: 310%;
+	    text-shadow: 5px 5px 8px black;
+	    font-family: 'Arial';
+	}
+
+
+	</style>
+</head>
+<body>
+<input type="checkbox" id="check">
+<label id="icone" for="check"><img src="../img/direita.png" width="40" height="40"></label>
+	<div class="barra">
+		<nav>
+			<a><div><center><p>Created by Thiago Direnzi B.</center></div></a>
+			<a href="https://www.linkedin.com/in/thiagodirenzi"><div class="link">LinkeDin</div></a>
+			<a href="https://www.instagram.com/direnzii_"><div class="link">@direnzii_</div></a>
+			<a>
+			<center>
+				<div class="direito"><p>Using the MovieDB for this application<br>Direitos reservados ®</p></div>
+			</center>
+			</a>
+		</nav>
+	</div>
+	<div class="conteudo">
+	<img class = "imagem" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/ri3KIjGp3Ek6iKUsTzMigmxTvdw.jpg">
+		<ul>
+		<b>MOVIE TITLE:</b> Qualquer titulo<br>
+		<b>SINOPSE:</b> Qualquer sinopse grande, teste, aaaaaaaaaaaaaaaaaaaah<br>
+		<b>RATE:</b> 9.0<br>
+		<b>GENRE:</b> Drama</ul>
+	</div>
+	<button class="btn-primary">Back</button>
+</body>
+</html>

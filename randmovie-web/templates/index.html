@@ -1,130 +1,137 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Random Movie</title>
-	<!-- Usado para definir o icone da aba -->
-	<link rel="icon" 
-      type="image/jpg" 
-      href="../img/popcorn.png" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+  <head>
     <meta charset="utf-8">
-	<style>
+    <title>Random Movie</title>
+    <link rel="icon" type="image/jpg" href="../static/popcorn.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <style>
+      body {
+        background: url(../static/movie.jpg) center/cover no-repeat fixed;
+      }
 
-    body {
-			background: url(../img/movie.jpg);
-  			background-size: cover;
-    }
-    form {
-		    display: flex;
-		    align-items: center;
-		    justify-content: center;
-		    flex-direction: column;
-		    min-height: 100vh;
-	}
-	#check{
-		display: none;
-		background-color: #f00;
-	}
-	#icone{
-		cursor: pointer;
-		padding: 10px;
-		position: absolute;
-		z-index: 1;
-	}
-	.barra{
-		background-color: #000000;
-		height: 100%;
-		width: 300px;
-		position: absolute;
-		left: -300px;
-		transition: all .2s linear;
-	}
-	.barra .link {
-		list-style: none;
-		background-color: #494950;
-	}
+      form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 100vh;
+      }
 
-	nav {
-		width: 100%;
-		position: relative;
-		top: 60px;
-	}
-	nav a {
-		text-decoration: none;
-	}
-	.link {
-		background-color: #494950;
-		padding: 20px;
-		color: #f4f4f9;
-		font-family: 'Arial';
-		font-size: 12pt;
-		padding: 20px;
-		border-bottom: 2px solid #222;
-		transition:  all .15s linear;
-		opacity: 0;
-	}
+      #check {
+        display: none;
+        background-color: #f00;
+      }
 
-	.link:hover {
-		background-color: #02022e;
-	}
+      #icone {
+        cursor: pointer;
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+      }
 
-	#check:checked ~ .barra nav a .link {
-			opacity: 1;
-			margin-top: 0;
-			transition-delay: .15s;
-	}
-	#check:checked ~ .barra {
-			transform: translateX(300px);
-	}
-	p {
-		color: white;
-	}
-	.direito {
-		color: white;
-		margin-top: 20px;
-	}
-	u {
-		font-size: 60px;
-		font-family: "Arial";
-		text-shadow: 5px 5px 10px black;
-	}
+      .barra {
+        background-color: #000000;
+        height: 100%;
+        width: 300px;
+        position: absolute;
+        left: -300px;
+        transition: all 0.2s linear;
+      }
 
-	</style>
-</head>
-<body>
-<input type="checkbox" id="check">
-<label id="icone" for="check"><img src="../img/direita.png" width="40" height="40"></label>
-<div class="barra">
-	<nav>
-		<a><div><center><p>Created by Thiago Direnzi B.</center></div></a>
-		<a href="https://www.linkedin.com/in/thiagodirenzi"><div class="link">LinkeDin</div></a>
-		<a href="https://www.instagram.com/direnzii_"><div class="link">@direnzii_</div></a>
-		<a>
-		<center>
-			<div class="direito">Using the MovieDB for this application<br>Direitos reservados ®</div>
-		</center>
-		</a>
-	</nav>
-</div>
-<form action="{{ url_for('gerar') }}" method="post">
-	<center>
-		<p><u>Random Movie</u></p>
-	</center>
-	<center>
-		<button type="submit" class="btn btn-primario">Generate</button><br>
-	</center>
-<form action="{{ url_for('gerar_rate') }}" method="post">
-	<center>
-		<button type="submit" class="btn btn-primario">Generate by rate</button><br>
-	</center>
-<form action="{{ url_for('gerar_genero') }}" method="post">
-	<center>
-		<button type="submit" class="btn btn-primario">Generate by genre</button><br>
-	</center>
-<form action="{{ url_for('gerar_full') }}" method="post">
-	<center>
-		<button type="submit" class="btn btn-primario">Generate by rate and genre</button><br>
-	</center>
+      .barra .link {
+        list-style: none;
+        background-color: #494950;
+      }
+
+      nav {
+        width: 100%;
+        position: relative;
+        top: 60px;
+      }
+
+      nav a {
+        text-decoration: none;
+      }
+
+      .link {
+        background-color: #494950;
+        padding: 20px;
+        color: #f4f4f9;
+        font-family: 'Arial';
+        font-size: 12pt;
+        border-bottom: 2px solid #222;
+        transition: all 0.15s linear;
+        opacity: 0;
+      }
+
+      .link:hover {
+        background-color: #02022e;
+      }
+
+      #check:checked~.barra nav a .link {
+        opacity: 1;
+        margin-top: 0;
+        transition-delay: 0.15s;
+      }
+
+      #check:checked~.barra {
+        transform: translateX(300px);
+      }
+
+      p {
+        color: white;
+      }
+
+      .direito {
+        color: white;
+        margin-top: 20px;
+      }
+
+      u {
+        font-size: 60px;
+        font-family: "Arial";
+        text-shadow: 5px 5px 10px black;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="checkbox" id="check">
+    <label id="icone" for="check">
+      <img src="../static/direita.png" width="40" height="40">
+    </label>
+    <div class="barra">
+      <nav>
+        <a>
+          <div>
+            <center>
+              <p>Created by Thiago Direnzi B.</p>
+            </center>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/thiagodirenzi">
+          <div class="link">LinkeDin</div>
+        </a>
+        <a href="https://www.instagram.com/direnzii_">
+          <div class="link">@direnzii_</div>
+        </a>
+        <a>
+          <center>
+            <div class="direito">Using the MovieDB for this application <br>Direitos reservados ® </div>
+          </center>
+        </a>
+      </nav>
+    </div>
+    <form action="{{ url_for('gerar') }}" method="GET">
+  <p>
+    <u>Random Movie</u>
+  </p>
+  <button type="submit" class="btn btn-primario">Generate</button>
+  <br>
 </form>
-</body>
+<form action="{{ url_for('gerar_rate') }}" method="POST">
+  <button type="submit" class="btn btn-primario">Generate by rate</button>
+  <br>
+</form>
+  </body>
 </html>
