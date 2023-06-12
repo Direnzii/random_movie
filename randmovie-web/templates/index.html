@@ -5,133 +5,239 @@
     <title>Random Movie</title>
     <link rel="icon" type="image/jpg" href="../static/popcorn.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
-    <style>
-      body {
-        background: url(../static/movie.jpg) center/cover no-repeat fixed;
-      }
-
-      form {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-
-      #check {
-        display: none;
-        background-color: #f00;
-      }
-
-      #icone {
-        cursor: pointer;
-        padding: 10px;
-        position: absolute;
-        z-index: 1;
-      }
-
-      .barra {
-        background-color: #000000;
-        height: 100%;
-        width: 300px;
-        position: absolute;
-        left: -300px;
-        transition: all 0.2s linear;
-      }
-
-      .barra .link {
-        list-style: none;
-        background-color: #494950;
-      }
-
-      nav {
-        width: 100%;
-        position: relative;
-        top: 60px;
-      }
-
-      nav a {
-        text-decoration: none;
-      }
-
-      .link {
-        background-color: #494950;
-        padding: 20px;
-        color: #f4f4f9;
-        font-family: 'Arial';
-        font-size: 12pt;
-        border-bottom: 2px solid #222;
-        transition: all 0.15s linear;
-        opacity: 0;
-      }
-
-      .link:hover {
-        background-color: #02022e;
-      }
-
-      #check:checked~.barra nav a .link {
-        opacity: 1;
-        margin-top: 0;
-        transition-delay: 0.15s;
-      }
-
-      #check:checked~.barra {
-        transform: translateX(300px);
-      }
-
-      p {
-        color: white;
-      }
-
-      .direito {
-        color: white;
-        margin-top: 20px;
-      }
-
-      u {
-        font-size: 60px;
-        font-family: "Arial";
-        text-shadow: 5px 5px 10px black;
-      }
-    </style>
   </head>
+  <style>
+    body {
+      background: url(../static/movie.jpg) center/cover no-repeat fixed;
+    }
+    button {
+      border: none !important;
+      transition: 150ms !important;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    p {
+      color: white;
+    }
+    u {
+      font-size: 60px;
+      font-family: "Arial";
+      text-shadow: 5px 5px 10px black;
+      user-select: none;
+    }
+    #check {
+      display: none;
+      background-color: #f00;
+    }
+
+    #icone {
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 5px;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      z-index: 1;
+      background-color: black;
+      opacity: 70%;
+      transition-duration: 250ms;
+    }
+
+    #icone:hover {
+      opacity: 100%;
+    }
+
+    #icone > svg {
+      fill: red !important;
+      height: 35px;
+      width: 35px;
+    }
+
+    .barra {
+      background-color: #000000;
+      height: 100%;
+      width: 300px;
+      position: absolute;
+      left: -300px;
+      transition: all 0.2s linear;
+    }
+
+    .barra .link {
+      list-style: none;
+      background-color: #494950;
+    }
+
+    nav {
+      width: 100%;
+      position: relative;
+      top: 60px;
+    }
+
+    nav a {
+      text-decoration: none;
+    }
+
+    .link {
+      background-color: #494950;
+      padding: 20px;
+      color: #f4f4f9;
+      font-family: 'Arial';
+      font-size: 12pt;
+      border-bottom: 2px solid #222;
+      transition: all 0.15s linear;
+      opacity: 0;
+    }
+
+    .link:hover {
+      background-color: #750007;
+    }
+
+    #check:checked~.barra nav a .link {
+      opacity: 1;
+      margin-top: 0;
+      transition-delay: 0.15s;
+    }
+
+    #check:checked~.barra {
+      transform: translateX(300px);
+    }
+
+    .direito {
+      color: white;
+      margin-top: 20px;
+    }
+    .center {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .direito {
+      color: white;
+      margin-top: 20px;
+    }
+    @-webkit-keyframes rotating /* Safari and Chrome */ {
+      from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes rotating {
+      from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+    .rotating {
+      -webkit-animation: rotating 1s linear infinite;
+      -moz-animation: rotating 1s linear infinite;
+      -ms-animation: rotating 1s linear infinite;
+      -o-animation: rotating 1s linear infinite;
+      animation: rotating 1s linear infinite;
+      fill: red !important;
+      height: 100px;
+      width: 100px;
+    }
+
+    .caixa {
+      background-color: black;
+      opacity: 95%;
+      padding: 40px;
+      border-radius: 5px;
+    }
+    .linha-botoes {
+      display: flex;
+      justify-content: space-evenly
+    }
+
+  </style>
   <body>
     <input type="checkbox" id="check">
     <label id="icone" for="check">
-      <img src="../static/direita.png" width="40" height="40">
+<!--      <img src="../static/direita.png">-->
+      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"></path></svg>
     </label>
     <div class="barra">
       <nav>
-        <a>
-          <div>
-            <center>
-              <p>Created by Thiago Direnzi B.</p>
-            </center>
-          </div>
-        </a>
+        <p>Created by Thiago Direnzi B.</p>
         <a href="https://www.linkedin.com/in/thiagodirenzi">
           <div class="link">LinkeDin</div>
         </a>
         <a href="https://www.instagram.com/direnzii_">
           <div class="link">@direnzii_</div>
         </a>
-        <a>
-          <center>
-            <div class="direito">Using the MovieDB for this application <br>Direitos reservados ® </div>
-          </center>
-        </a>
+        <p class="direito">Using the MovieDB for this application <br>Direitos reservados ® </p>
       </nav>
     </div>
-    <form action="{{ url_for('gerar') }}" method="GET">
-  <p>
-    <u>Random Movie</u>
-  </p>
-  <button type="submit" class="btn btn-primario">Generate</button>
-  <br>
-</form>
-<form action="{{ url_for('gerar_rate') }}" method="POST">
-  <button type="submit" class="btn btn-primario">Generate by rate</button>
-  <br>
-</form>
+    <div id="title" class="center">
+        <div class="caixa">
+          <p>
+            <u>Random Movie</u>
+          </p>
+          <div id="loading-box" style="display: none;">
+    <!--          <p style="font-size:50px;">Loading...</p>-->
+            <svg class="rotating"
+                 stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em"
+                 width="1em" xmlns="http://www.w3.org/2000/svg" data-darkreader-inline-fill=""
+                 data-darkreader-inline-stroke=""
+                 style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;"
+            >
+              <path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71
+              437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5
+              199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1
+              19.9-16 36-35.9 36z"></path>
+            </svg>
+      </div>
+      <div class="centralizar_margin">
+        <form id="myForm" action="{{ url_for('gerar') }}" method="GET">
+          <button type="submit" class="btn btn-primario" onclick="load()">Generate</button>
+        </form>
+        <div class="linha-botoes">
+          <form id="myForm2" action="{{ url_for('gerar_rate') }}" method="GET">
+            <button type="submit" class="btn btn-secondary" onclick="load()">By Rate</button>
+          </form>
+          <form id="myForm3" action="{{ url_for('gerar_genero') }}" method="GET">
+            <button type="submit" class="btn btn-secondary" onclick="load()">By Gender</button>
+          </form>
+          <form id="myForm4" action="{{ url_for('gerar_rate_aleatorio') }}" method="GET">
+            <button type="submit" class="btn btn-secondary" onclick="load()">Rate and Gender</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
   </body>
+  <script>
+    let loading = false;
+    const loadindBox = document.getElementById("loading-box")
+    function load() {
+      myForm.style.display = "none"
+      myForm2.style.display = "none"
+      myForm3.style.display = "none"
+      myForm4.style.display = "none"
+      loading = true;
+      loadindBox.style.display = "inline-block"
+    }
+  </script>
 </html>

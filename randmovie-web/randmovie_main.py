@@ -1,17 +1,13 @@
 import requests
 import random
-from googletrans import Translator
-from translate import Translator
 import os
 
 token = os.getenv(key="CHAVE_API_FILME")
 filme = {}
 
 
-def get_genero_filme(filme):
-    genero = filme['genres'][0]
-    translator = Translator(to_lang="pt")
-    genero = translator.translate(genero['name'])
+def get_genero_filme(filme_gen):
+    genero = filme_gen['genres'][0]
     if not genero:
         sem_genero = 'Não localizado'
         return sem_genero
@@ -21,8 +17,8 @@ def get_genero_filme(filme):
 
 def printar_generos():
     saida = ''
-    dict = get_genre_name()
-    for name in dict:
+    dict_gen = get_genre_name()
+    for name in dict_gen:
         saida += name + ", "
     n = 2
     final_str = ""
@@ -32,11 +28,11 @@ def printar_generos():
 
 
 def get_genre_name():
-    list = []
-    dict = get_genre()
-    for i in dict:
-        list.append(i)
-    return list
+    list_gen = []
+    dict_name_gen = get_genre()
+    for i in dict_name_gen:
+        list_gen.append(i)
+    return list_gen
 
 
 def get_genre():
@@ -47,32 +43,16 @@ def get_genre():
     list_id = []
     for genre in full:
         genero = genre["name"]
-        id: int = genre["id"]
-        dict_genero.update({genero.lower(): id})
+        id_gen: int = genre["id"]
+        dict_genero.update({genero.lower(): id_gen})
         genero_string += genero + ','
-        list_id.append(id)
-
-    translator = Translator(to_lang="pt")
-    genero_traduzido = translator.translate(genero_string)
-    genero_traduzido = genero_traduzido.split(',')
-    dict_genero_traduzido = {}
-    contador = 0
-    for genero in genero_traduzido:
-        try:
-            dict_genero_traduzido.update({genero.lower(): list_id[contador]})
-        except Exception as E:
-            break
-        contador += 1
-
-    a = dict_genero
-    b = dict_genero_traduzido
-
-    return dict_genero_traduzido
+        list_id.append(id_gen)
+    return dict_genero
 
 
 def numero_aleatorio():
-    numero_aleatorio = random.randrange(1, 501)
-    return numero_aleatorio
+    numero_aleatorio_full = random.randrange(1, 501)
+    return numero_aleatorio_full
 
 
 def chunks(lista):
@@ -89,8 +69,8 @@ def lista_aleatoria_func(lista):
 
 
 def requisicao(url):
-    requisicao = requests.get(url)
-    json = requisicao.json()
+    requisicao_url = requests.get(url)
+    json = requisicao_url.json()
     return json
 
 
@@ -112,8 +92,8 @@ def listar_filmes_rate_genero(rate, genero):
             continue
         else:
             for movie in filmes:
-                id = movie['id']
-                lista_filmes.append(id)
+                id_movie_1 = movie['id']
+                lista_filmes.append(id_movie_1)
             return lista_filmes
 
 
@@ -134,8 +114,8 @@ def listar_filmes_genero(genero):
             continue
         else:
             for movie in filmes:
-                id = movie['id']
-                lista_filmes.append(id)
+                id_movie_2 = movie['id']
+                lista_filmes.append(id_movie_2)
             return lista_filmes
 
 
@@ -154,8 +134,8 @@ def listar_filmes_rate(rate):
             continue
         else:
             for movie in filmes:
-                id = movie['id']
-                lista_filmes.append(id)
+                id_movie_3 = movie['id']
+                lista_filmes.append(id_movie_3)
             return lista_filmes
 
 
@@ -173,12 +153,12 @@ def listar_filmes():
             continue
         else:
             for movie in filmes:
-                id = movie['id']
-                lista_filmes.append(id)
+                id_movie_4 = movie['id']
+                lista_filmes.append(id_movie_4)
             return lista_filmes
 
 
-def rodar(lista_filmes):
+def rodar(lista_filmes, server_mode=False):
     i = True
     while i:
         try:
@@ -188,31 +168,31 @@ def rodar(lista_filmes):
 
             url_filme = f"https://api.themoviedb.org/3/movie/{id_filme}?" \
                         f"api_key={token}"
-            filme = requisicao(url_filme)
+            filme_requi = requisicao(url_filme)
 
-            nome = filme['original_title']
-            sinopse_ingles_from_dict = filme['overview']
-            translator = Translator(to_lang="pt")
-            sinopse = translator.translate(sinopse_ingles_from_dict)
-            genero = get_genero_filme(filme)
-            imagem = filme['poster_path']
+            nome = filme_requi['original_title']
+            sinopse_ingles_from_dict = filme_requi['overview']
+            genero = get_genero_filme(filme_requi)
+            imagem = filme_requi['poster_path']
             requisicao_imagem = f"https://image.tmdb.org/t/p/w600_and_h900_bestv2{imagem}"
-            if not sinopse:
-                sinopse = "Não encontrado"
-            votos = filme['vote_average']
+            if not sinopse_ingles_from_dict:
+                sinopse_ingles_from_dict = "Não encontrado"
+            votos = filme_requi['vote_average']
             print("*******************\n*** SEU FILME É ***")
-            print('Nome: ', nome, '\nSinopse: ', sinopse, '\nGenero: ', genero, '\nMédia de votos: ', votos)
+            print('Nome: ', nome, '\nSinopse: ', sinopse_ingles_from_dict, '\nGenero: ', genero, '\nMédia de votos: ', votos)
             print(requisicao_imagem)
             # input("Pressione enter para uma nova busca ...")
             saida = ''
             saida += "*******************\n*** SEU FILME É ***<br>"
-            saida += f"\n'Nome: ', {nome}, '\nSinopse: ', {sinopse}, '\n" \
+            saida += f"\n'Nome: ', {nome}, '\nSinopse: ', {sinopse_ingles_from_dict}, '\n" \
                      f"Genero: ', {genero}, '\nMédia de votos: ', {votos}<br>"
             saida += requisicao_imagem
             os.system('cls' if os.name == 'nt' else 'clear')
             i = False
-            return saida
-        except Exception as e:
+            if server_mode:
+                return filme_requi
+            return saida  # saida
+        except ValueError:
             continue
 
 
@@ -232,7 +212,8 @@ def main():
     banner()
     while True:
         print(
-            "**********************\n***DIGITE UMA OPÇÃO***\n(1) - Aleatório\n(2) - Por rate\n(3) - Por gênero\n(4) - Por rate e gênero")
+            "**********************\n***DIGITE UMA OPÇÃO***\n(1) - Aleatório\n(2) - Por rate\n"
+            "(3) - Por gênero\n(4) - Por rate e gênero")
         try:
             opcao = int(input('Insira aqui: '))
             if opcao == 1:
@@ -257,7 +238,7 @@ def main():
                 rodar(lista_aleatoria)
             elif opcao == 4:
                 rate = int(input("Insira um rate minimo para a busca, de 1 a 10: "))
-                if rate >= 1 and rate <= 10:
+                if 1 <= rate <= 10:
                     print("*************************\n***Generos disponiveis***")
                     printar_generos()
                     genero = input("Insira um gênero valido: ")
@@ -266,12 +247,11 @@ def main():
                     lista_filmes = listar_filmes_rate_genero(rate, genero)
                     lista_aleatoria = lista_aleatoria_func(lista_filmes)
                     rodar(lista_aleatoria)
-                    i = False
                 else:
                     print("rate inválido, insira um numero de 1 a 10 !!")
             else:
                 error()
-        except Exception as e:
+        except ValueError:
             print("Não existe essa opção !!")
 
 
