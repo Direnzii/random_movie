@@ -10,6 +10,7 @@
     body {
       background: url(../static/movie.jpg) center/cover no-repeat fixed;
     }
+
     button {
       border: none !important;
       transition: 150ms !important;
@@ -19,15 +20,18 @@
       display: flex;
       flex-direction: column;
     }
+
     p {
       color: white;
     }
+
     u {
       font-size: 60px;
       font-family: "Arial";
       text-shadow: 5px 5px 10px black;
       user-select: none;
     }
+
     #check {
       display: none;
       background-color: #f00;
@@ -35,7 +39,7 @@
 
     #icone {
       cursor: pointer;
-      padding: 10px;
+      padding: 5px;
       border-radius: 5px;
       position: absolute;
       left: 10px;
@@ -50,7 +54,7 @@
       opacity: 100%;
     }
 
-    #icone > svg {
+    #icone>svg {
       fill: red !important;
       height: 35px;
       width: 35px;
@@ -98,7 +102,6 @@
     #check:checked~.barra nav a .link {
       opacity: 1;
       margin-top: 0;
-      transition-delay: 0.15s;
     }
 
     #check:checked~.barra {
@@ -109,6 +112,7 @@
       color: white;
       margin-top: 20px;
     }
+
     .center {
       width: 100vw;
       height: 100vh;
@@ -117,22 +121,29 @@
       align-items: center;
       justify-content: center;
     }
+
     .direito {
       color: white;
       margin-top: 20px;
     }
-    @-webkit-keyframes rotating /* Safari and Chrome */ {
+
+    @-webkit-keyframes rotating
+
+    /* Safari and Chrome */
+      {
       from {
         -webkit-transform: rotate(0deg);
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
       }
+
       to {
         -webkit-transform: rotate(360deg);
         -o-transform: rotate(360deg);
         transform: rotate(360deg);
       }
     }
+
     @keyframes rotating {
       from {
         -ms-transform: rotate(0deg);
@@ -141,6 +152,7 @@
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
       }
+
       to {
         -ms-transform: rotate(360deg);
         -moz-transform: rotate(360deg);
@@ -149,6 +161,7 @@
         transform: rotate(360deg);
       }
     }
+
     .rotating {
       -webkit-animation: rotating 1s linear infinite;
       -moz-animation: rotating 1s linear infinite;
@@ -160,25 +173,51 @@
       width: 100px;
     }
 
-    .caixa {
-      background-color: black;
-      opacity: 95%;
-      padding: 40px;
-      border-radius: 5px;
-    }
     .linha-botoes {
       display: flex;
       justify-content: space-evenly
+    }
+
+    .caixa {
+      position: absolute; !important
+      z-index: 1;
+    }
+
+    .black-box::after {
+      content: "";
+      position: absolute;
+      border-radius: 5px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30em;
+      height: 19em;
+      background-color: rgba(0, 0, 0, 0.85);
+      z-index: -1;
+    }
+    #loading-box {
+      position: relative;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+    }
+    .icone-fechar {
+      display: none;
     }
 
   </style>
   <body>
     <input type="checkbox" id="check">
     <label id="icone" for="check">
-<!--      <img src="../static/direita.png">-->
-      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"></path></svg>
+<!--      <svg id="icone-menu" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="&#45;&#45;darkreader-inline-fill: currentColor; &#45;&#45;darkreader-inline-stroke: currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke="">-->
+<!--        <path d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"></path>-->
+<!--      </svg>-->
+      <svg id="icone-menu" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke=""><path d="M16 5H0V4h16v1zm0 8H0v-1h16v1zm0-4.008H0V8h16v.992z"></path></svg>
+      <svg id="icone-fechar" class="icone-fechar" stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" viewBox="0 0 17 17" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke="">
+        <path d="M9.207 8.5l6.646 6.646-0.707 0.707-6.646-6.646-6.646 6.646-0.707-0.707 6.646-6.646-6.647-6.646 0.707-0.707 6.647 6.646 6.646-6.646 0.707 0.707-6.646 6.646z"></path>
+      </svg>
     </label>
-    <div class="barra">
+    <div id="barra" class="barra">
       <nav>
         <p>Created by Thiago Direnzi B.</p>
         <a href="https://www.linkedin.com/in/thiagodirenzi">
@@ -191,46 +230,42 @@
       </nav>
     </div>
     <div id="title" class="center">
-        <div class="caixa">
-          <p>
-            <u>Random Movie</u>
-          </p>
-          <div id="loading-box" style="display: none;">
-    <!--          <p style="font-size:50px;">Loading...</p>-->
-            <svg class="rotating"
-                 stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em"
-                 width="1em" xmlns="http://www.w3.org/2000/svg" data-darkreader-inline-fill=""
-                 data-darkreader-inline-stroke=""
-                 style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;"
-            >
-              <path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71
-              437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5
-              199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1
-              19.9-16 36-35.9 36z"></path>
-            </svg>
-      </div>
-      <div class="centralizar_margin">
-        <form id="myForm" action="{{ url_for('gerar') }}" method="GET">
-          <button type="submit" class="btn btn-primario" onclick="load()">Generate</button>
-        </form>
-        <div class="linha-botoes">
-          <form id="myForm2" action="{{ url_for('gerar_rate') }}" method="GET">
-            <button type="submit" class="btn btn-secondary" onclick="load()">By Rate</button>
+      <div class="caixa">
+        <p>
+          <u>Random Movie</u>
+        </p>
+        <div id="loading-box" style="display: none;">
+          <svg class="rotating" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" data-darkreader-inline-fill="" data-darkreader-inline-stroke="" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;">
+            <path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 0 0-94.3-139.9 437.71
+          437.71 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5
+          199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1
+          19.9-16 36-35.9 36z"></path>
+          </svg>
+        </div>
+        <div class="centralizar_margin">
+          <form id="myForm" action="{{ url_for('gerar') }}" method="GET">
+            <button type="submit" class="btn btn-primario" onclick="load()">Generate</button>
           </form>
-          <form id="myForm3" action="{{ url_for('gerar_genero') }}" method="GET">
-            <button type="submit" class="btn btn-secondary" onclick="load()">By Gender</button>
-          </form>
-          <form id="myForm4" action="{{ url_for('gerar_rate_aleatorio') }}" method="GET">
-            <button type="submit" class="btn btn-secondary" onclick="load()">Rate and Gender</button>
-          </form>
+          <div class="linha-botoes">
+            <form id="myForm2" action="{{ url_for('gerar_rate') }}" method="GET">
+              <button type="submit" class="btn btn-secondary" onclick="load()">By Rate</button>
+            </form>
+            <form id="myForm3" action="{{ url_for('gerar_genero') }}" method="GET">
+              <button type="submit" class="btn btn-secondary" onclick="load()">By Gender</button>
+            </form>
+            <form id="myForm4" action="{{ url_for('gerar_rate_aleatorio') }}" method="GET">
+              <button type="submit" class="btn btn-secondary" onclick="load()">Rate and Gender</button>
+            </form>
+          </div>
         </div>
       </div>
-      </div>
+      <div class="black-box"></div>
     </div>
   </body>
   <script>
     let loading = false;
     const loadindBox = document.getElementById("loading-box")
+
     function load() {
       myForm.style.display = "none"
       myForm2.style.display = "none"
@@ -239,5 +274,29 @@
       loading = true;
       loadindBox.style.display = "inline-block"
     }
+
+    const icone = document.getElementById("check")
+    const iconeMenu = document.getElementById("icone-menu")
+    const iconeFechar = document.getElementById("icone-fechar")
+
+     function fechaMenu() {
+      if (icone.checked) {
+        icone.checked = false;
+      }
+     }
+    function mudarIcone() {
+      if (icone.checked) {
+        iconeFechar.style.display = "inline-block";
+        iconeMenu.style.display = "none";
+      }else {
+        iconeFechar.style.display = "none";
+        iconeMenu.style.display = "inline-block";
+      }
+    }
+
+    icone.addEventListener("change", mudarIcone);
+
+    const bodyBarra = document.getElementById("title")
+    bodyBarra.addEventListener("click", fechaMenu);
   </script>
 </html>
