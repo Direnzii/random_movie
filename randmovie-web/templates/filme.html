@@ -19,6 +19,10 @@
       list-style: none;
     }
 
+  p {
+      color: white;
+    }
+
   #check {
     display: none;
     background-color: #f00;
@@ -133,12 +137,18 @@
     position: absolute;
     margin: 2em 6em 0;
   }
+ .icone-fechar {
+    display: none;
+  }
   </style>
   <body>
     <input type="checkbox" id="check">
     <label id="icone" for="check">
-      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke="">
-        <path d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"></path>
+      <svg id="icone-menu" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke="">
+        <path d="M16 5H0V4h16v1zm0 8H0v-1h16v1zm0-4.008H0V8h16v.992z"></path>
+      </svg>
+      <svg id="icone-fechar" class="icone-fechar" stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" viewBox="0 0 17 17" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;" data-darkreader-inline-fill="" data-darkreader-inline-stroke="">
+        <path d="M9.207 8.5l6.646 6.646-0.707 0.707-6.646-6.646-6.646 6.646-0.707-0.707 6.646-6.646-6.647-6.646 0.707-0.707 6.647 6.646 6.646-6.646 0.707 0.707-6.646 6.646z"></path>
       </svg>
     </label>
     <div class="barra">
@@ -174,4 +184,28 @@
       </ul>
     </div>
   </body>
+<script>
+  const icone = document.getElementById("check")
+  const iconeMenu = document.getElementById("icone-menu")
+  const iconeFechar = document.getElementById("icone-fechar")
+
+   function fechaMenu() {
+    if (icone.checked) {
+      icone.checked = false;
+    }
+   }
+  function mudarIcone() {
+    if (icone.checked) {
+      iconeFechar.style.display = "inline-block";
+      iconeMenu.style.display = "none";
+    }else {
+      iconeFechar.style.display = "none";
+      iconeMenu.style.display = "inline-block";
+    }
+  }
+  icone.addEventListener("change", mudarIcone);
+
+  const bodyBarra = document.getElementById("title")
+  bodyBarra.addEventListener("click", fechaMenu);
+</script>
 </html>

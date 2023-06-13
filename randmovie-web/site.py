@@ -57,4 +57,4 @@ def gerar_rate_aleatorio():
     return """OK, gerar rate genero EM MANUTENÇÃO...<br><button onclick="window.location.href='/'">Back</button>"""
 
 
-app.run(debug=True, port=80)
+app.run(port=80)
