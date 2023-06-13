@@ -4,12 +4,16 @@ from randmovie_main import *
 
 app = Flask(__name__)
 
+sinopse_teste = """Mauris ullamcorper turpis varius, porta justo vel, suscipit mauris. Maecenas dictum elit leo, 
+a eleifend justo pellentesque sit amet. Nullam pharetra auctor nibh. Praesent placerat aliquet metus, vel auctor 
+nisi sollicitudin ac. Integer dignissim magna risus, nec dignissim purus elementum. """
+
+titulo_teste = """Donec tempus cursus tristique. Nullam pulvinar auctor nibh sit amet."""
+
 
 def renderizar_filme(filme_saida):  # filme_saida
     titulo = filme_saida['original_title']
     sinopse_ingles_from_dict = filme_saida['overview']
-    # translator = Translator(to_lang="pt")
-    # sinopse = translator.translate(sinopse_ingles_from_dict)
     if not sinopse_ingles_from_dict:
         sinopse_ingles_from_dict = "Não encontrado"
     rate = filme_saida['vote_average']
@@ -17,8 +21,9 @@ def renderizar_filme(filme_saida):  # filme_saida
     jpg = filme_saida['poster_path']
     print(filme_saida)
     return render_template('filme.html', titulo=titulo, sinopse=sinopse_ingles_from_dict, rate=rate, genero=genero, jpg=jpg)
-    # return render_template('filme.html', titulo="titulo", sinopse="sinopse", rate="rate", genero="genero",
-    # jpg="https://image.tmdb.org/t/p/w600_and_h900_bestv2//9MHZ2sALxREoLFVjGh7ueaSIVoJ.jpg")
+    # return render_template('filme.html', titulo=titulo_teste, sinopse=sinopse_teste, rate="9.985",
+    #                        genero="Muita comedia",
+    #                        jpg="https://image.tmdb.org/t/p/w600_and_h900_bestv2//9MHZ2sALxREoLFVjGh7ueaSIVoJ.jpg")
 
 
 @app.route('/')
