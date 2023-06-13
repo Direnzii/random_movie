@@ -34,7 +34,6 @@ def index():
 def gerar():
     lista_filmes = listar_filmes()
     lista_aleatoria = lista_aleatoria_func(lista_filmes)
-    print('rodando agr...')
     render_template('index.html', loading=True)
     saida = rodar(lista_aleatoria, server_mode=True)
     return renderizar_filme(saida)
