@@ -19,7 +19,6 @@ def renderizar_filme(filme_saida):  # filme_saida
     rate = filme_saida['vote_average']
     genero = get_genero_filme(filme_saida)['name']
     jpg = filme_saida['poster_path']
-    print(filme_saida)
     return render_template('filme.html', titulo=titulo, sinopse=sinopse_ingles_from_dict, rate=rate, genero=genero, jpg=jpg)
     # return render_template('filme.html', titulo=titulo_teste, sinopse=sinopse_teste, rate="9.985",
     #                        genero="Muita comedia",
@@ -57,4 +56,4 @@ def gerar_rate_aleatorio():
     return """OK, gerar rate genero EM MANUTENÇÃO...<br><button onclick="window.location.href='/'">Back</button>"""
 
 
-app.run(port=80)
+app.run(host='0.0.0.0', port=80)
