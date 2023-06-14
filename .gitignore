@@ -130,3 +130,6 @@ dmypy.json
 
 # Ignorar a mais
 .idea
+
+#api key
+api-key.dir

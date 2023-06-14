@@ -1,0 +1,14 @@
+[
+  {
+  "rate": 5.0,
+  "genero": "action"
+  },
+  {
+    "rate": null,
+    "genero": "action"
+  },
+  {
+    "rate": 5.0,
+    "genero": null
+  }
+]
