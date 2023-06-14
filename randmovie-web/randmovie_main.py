@@ -2,8 +2,8 @@ import requests
 import random
 import os
 
-token = os.getenv(key="CHAVE_API_FILME")
-filme = {}
+with open('api-key.dir', 'r') as f:
+    token = f.read()
 
 
 def get_genero_filme(filme_gen):
@@ -179,7 +179,8 @@ def rodar(lista_filmes, server_mode=False):
                 sinopse_ingles_from_dict = "Não encontrado"
             votos = filme_requi['vote_average']
             print("*******************\n*** SEU FILME É ***")
-            print('Nome: ', nome, '\nSinopse: ', sinopse_ingles_from_dict, '\nGenero: ', genero, '\nMédia de votos: ', votos)
+            print('Nome: ', nome, '\nSinopse: ', sinopse_ingles_from_dict, '\nGenero: ', genero, '\nMédia de votos: ',
+                  votos)
             print(requisicao_imagem)
             # input("Pressione enter para uma nova busca ...")
             saida = ''
@@ -191,7 +192,7 @@ def rodar(lista_filmes, server_mode=False):
             i = False
             if server_mode:
                 return filme_requi
-            return saida  # saida
+            return saida
         except ValueError:
             continue
 
