@@ -6,7 +6,7 @@ from randmovie_main import *
 app = Flask(__name__)
 
 
-def renderizar_filme(filme_saida, just_api=False):
+def renderizar_filme(filme_saida):
     if filme_saida:
         titulo = filme_saida['original_title']
         sinopse_ingles_from_dict = filme_saida['overview']
@@ -15,13 +15,8 @@ def renderizar_filme(filme_saida, just_api=False):
         rate = filme_saida['vote_average']
         genero = get_genero_filme(filme_saida)['name']
         jpg = filme_saida['poster_path']
-        if just_api:
-            saida = [titulo, sinopse_ingles_from_dict, rate, genero,
-                     f"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{jpg}"]
-            return saida
-        if not just_api:
-            return render_template('filme.html', titulo=titulo, sinopse=sinopse_ingles_from_dict,
-                                   rate=rate, genero=genero, jpg=jpg)
+        return render_template('filme.html', titulo=titulo, sinopse=sinopse_ingles_from_dict,
+                               rate=rate, genero=genero, jpg=jpg)
     if not filme_saida:
         return render_template('filme.html', titulo="titulo_teste", sinopse="sinopse_teste", rate="9.985",
                                genero="Muita comedia",
@@ -33,7 +28,7 @@ def gerar_api():
     lista_filmes = listar_filmes()
     lista_aleatoria = lista_aleatoria_func(lista_filmes)
     saida = rodar(lista_aleatoria, server_mode=True)
-    return renderizar_filme(saida, just_api=True)
+    return renderizar_filme(saida)
 
 
 @app.route('/opcoes_genero', methods=['GET', ])
@@ -55,13 +50,13 @@ def gerar_aleatorio_rate_genero():
             lista_filmes = listar_filmes_genero(genero)
             lista_aleatoria = lista_aleatoria_func(lista_filmes)
             saida = rodar(lista_aleatoria, server_mode=True)
-            return renderizar_filme(saida, just_api=True)
+            return renderizar_filme(saida)
         if not genero:
             if 1 <= rate <= 10:
                 lista_filmes = listar_filmes_rate(rate)
                 lista_aleatoria = lista_aleatoria_func(lista_filmes)
                 saida = rodar(lista_aleatoria, server_mode=True)
-                return renderizar_filme(saida, just_api=True)
+                return renderizar_filme(saida)
             else:
                 return make_response({'result': 'rate invalido disgraaaaaça'}, 400)
         if rate and genero:
@@ -70,7 +65,7 @@ def gerar_aleatorio_rate_genero():
                 lista_filmes = listar_filmes_rate_genero(rate, genero)
                 lista_aleatoria = lista_aleatoria_func(lista_filmes)
                 saida = rodar(lista_aleatoria, server_mode=True)
-                return renderizar_filme(saida, just_api=True)
+                return renderizar_filme(saida)
             else:
                 return make_response({'result': 'rate invalido disgraaaaaça'}, 400)
         else:
