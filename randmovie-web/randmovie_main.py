@@ -84,8 +84,10 @@ def listar_filmes_rate_genero(rate, genero):
                     "include_adult=false&" \
                     "include_video=false&" \
                     f"page={numero_aleatorio()}&" \
+                    f"vote_average.lte={(rate + 1) - 0.01}&" \
                     f"vote_average.gte={rate}&" \
-                    f"with_genres={genero_id}"
+                    f"with_genres={genero_id}&" \
+                    f"vote_count.gte=1"
         filmes = requisicao(url_geral)
         filmes = filmes['results']
         if not filmes:
@@ -127,7 +129,9 @@ def listar_filmes_rate(rate):
                     "include_adult=false&" \
                     "include_video=false&" \
                     f"page={numero_aleatorio()}&" \
-                    f"vote_average.gte={rate}"
+                    f"vote_average.lte={(rate + 1) - 0.01}&"\
+                    f"vote_average.gte={rate}&"\
+                    f"vote_count.gte=1"
         filmes = requisicao(url_geral)
         filmes = filmes['results']
         if not filmes:
@@ -191,6 +195,9 @@ def rodar(lista_filmes, server_mode=False):
             os.system('cls' if os.name == 'nt' else 'clear')
             i = False
             if server_mode:
+                imagem = filme_requi['poster_path']
+                if not imagem:
+                    filme_requi['poster_path'] = ""
                 return filme_requi
             return saida
         except ValueError:

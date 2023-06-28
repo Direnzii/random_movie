@@ -2,8 +2,12 @@ import json
 
 from flask import Flask, render_template, request, make_response
 from randmovie_main import *
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 def renderizar_filme(filme_saida):
@@ -28,12 +32,15 @@ def gerar_api():
     lista_filmes = listar_filmes()
     lista_aleatoria = lista_aleatoria_func(lista_filmes)
     saida = rodar(lista_aleatoria, server_mode=True)
-    return renderizar_filme(saida)
+    return saida
 
 
 @app.route('/opcoes_genero', methods=['GET', ])
 def opcoes_genero():
-    return get_genre()
+    list_genero = []
+    for i in get_genre():
+        list_genero.append(i)
+    return list_genero
 
 
 @app.route('/gerar_aleatorio_rate_genero', methods=['POST', ])
@@ -43,20 +50,20 @@ def gerar_aleatorio_rate_genero():
         body_json = json.loads(body)
         rate = body_json.get('rate')
         genero = body_json.get('genero')
-        if not rate:
+        if not rate and rate != 0:
             if not genero:
                 return make_response({'result': 'rate invalido disgraaaaaça'}, 400)
-        if not rate:
+        if not rate and rate != 0:
             lista_filmes = listar_filmes_genero(genero)
             lista_aleatoria = lista_aleatoria_func(lista_filmes)
             saida = rodar(lista_aleatoria, server_mode=True)
-            return renderizar_filme(saida)
+            return saida
         if not genero:
-            if 1 <= rate <= 10:
-                lista_filmes = listar_filmes_rate(rate)
+            if 0 <= rate <= 10:
+                lista_filmes = listar_filmes_rate(int(rate))
                 lista_aleatoria = lista_aleatoria_func(lista_filmes)
                 saida = rodar(lista_aleatoria, server_mode=True)
-                return renderizar_filme(saida)
+                return saida
             else:
                 return make_response({'result': 'rate invalido disgraaaaaça'}, 400)
         if rate and genero:
@@ -65,13 +72,13 @@ def gerar_aleatorio_rate_genero():
                 lista_filmes = listar_filmes_rate_genero(rate, genero)
                 lista_aleatoria = lista_aleatoria_func(lista_filmes)
                 saida = rodar(lista_aleatoria, server_mode=True)
-                return renderizar_filme(saida)
+                return saida
             else:
                 return make_response({'result': 'rate invalido disgraaaaaça'}, 400)
         else:
             return make_response({'result': 'json incorreto'}, 400)
-    except:
-        return make_response({'result': 'json incorreto'}, 400)
+    except Exception as E:
+        return make_response({'result': 'json incorreto', "error": E}, 400)
 
 
 app.run(host='0.0.0.0', port=80)
