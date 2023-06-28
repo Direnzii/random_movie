@@ -1,0 +1,88 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body {
+  background: url(../public/static/movie.jpg) center/cover no-repeat fixed;
+}
+p {
+  color: white;
+}
+u {
+  font-size: 60px;
+  font-family: "Arial";
+  text-shadow: 5px 5px 10px black;
+  user-select: none;
+}
+.container-primary {
+  position: absolute;
+  margin: 20em 45em 0;
+}
+.btn-principal {
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 1em;
+}
+#btn-principal {
+  font-size: 30px;
+  border-radius: 10px;
+}
+.btn-secundary {
+  margin-top: 1em;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+#btn-secundary {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  flex-grow: 0;
+  font-size: 15px;
+}
+.fundo-preto {
+  content: "";
+  position: absolute;
+  border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30em;
+  height: 20em;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: -1;
+  margin-top: 1em;
+}
